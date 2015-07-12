@@ -1,0 +1,22 @@
+## Code for Plot 3 of Project 1
+## July 2015
+
+## This code assumes that the data file household_power_consumption.txt
+## is in your working directory.
+
+#### R Code Starts Here - and it only took me an hour for these four lines!!!
+setwd("/Users/mmcgee/Dropbox/Coursera Certificate/4 Exploratory Data Analysis")
+names <- c("Date","Time","GlobalActive","GlobalReactive", "Voltage","Intensity","Meter1","Meter2","Meter3")
+wholeData <- read.table(file="household_power_consumption.txt",sep=";",na.strings="?",skip=1,col.names=names,stringsAsFactors=FALSE)
+usageData <- subset(wholeData,Date == "1/2/2007" | Date == "2/2/2007")
+
+attach(usageData)
+
+## Create Plot 3
+png(file="plot3.png")
+plot(DateTime,Meter1,type="l",xlab="",ylab="Energy sub metering")
+lines(DateTime,Meter2,type="l",col="red")
+lines(DateTime,Meter3,type="l",col="blue")
+legend("topright",lty=1,col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+dev.off()
+
